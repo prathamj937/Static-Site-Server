@@ -111,6 +111,8 @@ Write a deploy.sh script for one-command deployment 🖥️💨
 
 Set up a custom domain with Route 53 or other DNS provider 🌐🔗
 
+
+https://roadmap.sh/projects/static-site-server
 Add HTTPS with Let’s Encrypt SSL certificates 🔒✨
 
 📬 Contact / Questions?
