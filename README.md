@@ -1,65 +1,65 @@
-# Static Site Server Setup on AWS EC2
-This project demonstrates how to set up a basic Linux server (Ubuntu) on AWS EC2 to serve a static website using Nginx, including how to deploy the site files securely from a local machine.
+# 🚀 Static Site Server Setup on AWS EC2 🖥️🌐
+Welcome to my project! This shows how I set up a basic Linux server (Ubuntu) on AWS EC2 to serve a static website using Nginx, and how I deployed my site from my local machine. Follow along for the full adventure! 🎉
 
-Project Overview
-Create an EC2 Ubuntu instance on AWS
+📋 Project Overview
+🌟 Launch an Ubuntu EC2 instance on AWS
 
-Install and configure Nginx to serve static files
+🔧 Install & configure Nginx to serve static files
 
-Upload local static site files to the server
+📁 Upload static site files securely
 
-Configure server to serve the site on port 80
+🌍 Serve the site on HTTP port 80
 
-Use scp to securely transfer files
+🔐 Use scp to transfer files (since rsync gave me trouble!)
 
-Troubleshoot common issues with permissions and AWS security groups
+🐛 Troubleshoot permission & firewall issues
 
-Steps to Setup and Deploy
-1. Create EC2 Instance
-Logged in to AWS Console and launched an Ubuntu 22.04 LTS instance
+🛠️ Step-by-Step Setup & Deployment
+1️⃣ Create EC2 Instance
+Launched Ubuntu 22.04 LTS instance on AWS ☁️
 
-Generated and downloaded .pem SSH key file
+Generated & downloaded SSH .pem key 🔑
 
-Configured security group to allow HTTP (port 80) and SSH (port 22) access
+Opened Security Group ports: SSH (22) & HTTP (80) 🚪
 
-2. Connect to the Server
-Connected to the server using the web-based EC2 Instance Connect terminal
+2️⃣ Connect to the Server
+Connected using AWS EC2 Instance Connect web terminal 💻
 
-Verified server was running and updated packages using:
+Ran system updates:
 
 bash
 Copy
 Edit
 sudo apt update && sudo apt upgrade -y
-3. Install Nginx
+3️⃣ Install Nginx
 Installed Nginx web server:
 
 bash
 Copy
 Edit
 sudo apt install nginx -y
-Verified Nginx service status:
+Checked Nginx was running:
 
 bash
 Copy
 Edit
 sudo systemctl status nginx
-4. Prepare Static Site Files Locally
-Created a simple static site folder with index.html, CSS, and images on local machine
+4️⃣ Prepare Static Site Files Locally
+Built a simple site with index.html, CSS, images 🎨🖼️
 
-5. Transfer Files to Server
-Initially tried using rsync on Git Bash but encountered rsync: command not found error
+5️⃣ Transfer Files to Server
+Tried rsync on Git Bash but got ❌ command not found error
 
-Switched to using scp from Git Bash on local machine to copy files:
+Switched to scp for file transfer:
 
 bash
 Copy
 Edit
 scp -i "/path/to/nginx.pem" -r /path/to/static-site/* ubuntu@<public-ip>:~/site
-Used absolute Windows path conversion for .pem key when needed
+Handled Windows path quirks with .pem file 🔄
 
-6. Move Files on Server and Set Permissions
-Via EC2 web terminal, moved files to Nginx root directory:
+6️⃣ Move Files & Set Permissions on Server
+On server terminal:
 
 bash
 Copy
@@ -67,38 +67,38 @@ Edit
 sudo rm -rf /var/www/html/*
 sudo mv ~/site/* /var/www/html/
 sudo chmod -R 755 /var/www/html
-Restarted Nginx:
+Restarted Nginx to apply changes:
 
 bash
 Copy
 Edit
 sudo systemctl restart nginx
-7. Open Firewall Ports
-Confirmed HTTP port 80 was open in the EC2 instance’s security group inbound rules
+7️⃣ Open Firewall Ports
+Ensured HTTP (port 80) was allowed in EC2 Security Group inbound rules 🔓
 
-8. Test Website
-Opened browser and accessed site via public IP:
-http://<public-ip>/
+8️⃣ Test Website
+Opened browser at:
+http://<public-ip>/ 🌐
 
-Site loaded successfully!
+Voila! Site loaded perfectly! 🎉🎉
 
-Challenges & Solutions
-Problem: rsync was not available on Windows Git Bash by default
-Solution: Used scp instead for file transfer
+🐞 Challenges & How I Overcame Them
+❌ rsync missing on Git Bash → ✔️ used scp instead
 
-Problem: Permission denied errors when copying files directly to /var/www/html
-Solution: Uploaded files to ~/site/ and then moved them to /var/www/html/ using sudo commands on server
+❌ Permission denied uploading directly to /var/www/html → ✔️ uploaded to ~/site/ then moved with sudo
 
-Problem: Site not loading initially
-Solution: Opened port 80 in EC2 Security Group inbound rules to allow HTTP traffic
+❌ Site not loading → ✔️ opened port 80 in security group
 
-Problem: Confused about which IP to use (private vs public)
-Solution: Verified and used the public IPv4 address from AWS EC2 dashboard
+❌ Confused about which IP to use → ✔️ used AWS public IPv4 address
 
-How to Deploy Updates
-From local machine, run scp command to copy updated files to ~/site/ on server
+🔄 How to Deploy Updates
+Run scp from your local machine again:
 
-SSH or use EC2 web terminal to run:
+bash
+Copy
+Edit
+scp -i "/path/to/nginx.pem" -r /path/to/static-site/* ubuntu@<public-ip>:~/site
+SSH into server or use web terminal and run:
 
 bash
 Copy
@@ -106,15 +106,12 @@ Edit
 sudo rm -rf /var/www/html/*
 sudo mv ~/site/* /var/www/html/
 sudo systemctl restart nginx
-Optional Next Steps
-Automate deployment with a shell script (deploy.sh)
+🚀 Next Steps to Improve
+Write a deploy.sh script for one-command deployment 🖥️💨
 
-Configure custom domain with Route 53 or other DNS provider
+Set up a custom domain with Route 53 or other DNS provider 🌐🔗
 
-Enable HTTPS with Let’s Encrypt SSL certificates
+Add HTTPS with Let’s Encrypt SSL certificates 🔒✨
 
-Contact
-For questions or help, feel free to reach out!
-
-
-https://roadmap.sh/projects/static-site-server
+📬 Contact / Questions?
+Feel free to reach out! Let’s build awesome things together. 🤝💡
